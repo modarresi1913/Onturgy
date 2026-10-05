@@ -20,7 +20,6 @@ foreach ($p in $paths) {
 
 if (-not $tarball) {
     Write-Host "Tarball not found. Please download onturgy-repo.tar.gz from the preview page first." -ForegroundColor Red
-    Write-Host "  https://preview-<bot-id>.space-z.ai/" -ForegroundColor Cyan
     exit 1
 }
 

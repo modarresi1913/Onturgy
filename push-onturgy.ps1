@@ -47,7 +47,6 @@ if (-not $tarballPath) {
         Write-Host "  Tarball not found." -ForegroundColor Red
         Write-Host ""
         Write-Host "  Please download it first from the web preview page:" -ForegroundColor Cyan
-        Write-Host "    https://preview-<bot-id>.space-z.ai/" -ForegroundColor Cyan
         Write-Host "  Look for the violet 'GitHub-ready Repository Tarball' card." -ForegroundColor Cyan
         Write-Host "  Save the file to your Downloads folder, then re-run this script." -ForegroundColor Cyan
         exit 1
