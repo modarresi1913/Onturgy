@@ -1,0 +1,130 @@
+{
+  "audit_metadata": {
+    "system": "ChatGPT (OpenAI)",
+    "auditor": "single AI agent",
+    "audit_date": "2026-10-05",
+    "data_sources": [
+      "OpenAI Terms of Use (public)",
+      "GPT-4 and GPT-4o system cards (public)",
+      "Observed behavior reports (peer-reviewed and journalistic)"
+    ],
+    "version": "v1",
+    "passes_represented": ["Pass I", "Pass IV simulation"]
+  },
+  "audit_results": {
+    "Agency": {
+      "score": "Medium",
+      "question": "Who actually initiates action?",
+      "evidence": ["system cards", "observed tool-use", "default behaviors"],
+      "indicator": "override cost; share of actions initiated by system vs user",
+      "reason": "user initiates sessions, but assistant pre-populates defaults, suggested prompts, and tool uses; override is possible but requires user awareness",
+      "pass_iv_unique_detection": ["Boeing 737 MAX MCAS", "Microsoft Tay", "Boeing Starliner", "Uber Greyball"],
+      "pass_iv_unique_count_at_n50": 4
+    },
+    "Value": {
+      "score": "Medium",
+      "question_v2": "For declared-objective architectures: does the operational objective diverge from the declared? For undeclared architectures, this row reduces to Authority + Contestability.",
+      "evidence": ["declared objective (system card)", "operational objective (observed under stress)", "classification of the gap"],
+      "indicator": "declared-operational gap; for undeclared architectures: not applicable",
+      "reason": "declared objective is 'helpful and safe'; observed behavior optimizes for a narrower operationalization of safety that is not in the declared philosophy — this is the dark-ontology pattern of §6",
+      "declared_objective": true,
+      "operational_divergence": true,
+      "value_load_prediction": "yes (consistent with refined Pass IV prediction)",
+      "pass_iv_unique_detection": ["YouTube recommendations", "Zillow iBuyer", "Facebook emotional contagion", "Cambridge Analytica", "Boeing MCAS", "Microsoft Tay", "TikTok algorithm", "Wells Fargo cross-sell", "FTX commingled", "VW dieselgate", "Uber Greyball", "Tesla Autopilot", "Robinhood GameStop", "Peloton Tread+", "Strava heatmap", "Spotify Discovery Mode", "Apple CSAM"],
+      "pass_iv_unique_count_at_n50": 17
+    },
+    "Authority": {
+      "score": "High",
+      "question": "Who can make irreversible decisions?",
+      "evidence": ["ToS (account termination)", "model access changes", "usage policy enforcement"],
+      "indicator": "concentration of irreversible-decision rights",
+      "reason": "OpenAI holds unilateral, irreversible rights to terminate accounts and access; user appeal channel exists but is opaque",
+      "pass_iv_unique_detection": ["OpenAI board", "FTX", "Wells Fargo", "Apple App Store", "Reddit", "Twitter/X", "CrowdStrike"],
+      "pass_iv_unique_count_at_n50": 7
+    },
+    "Memory": {
+      "score": "Medium",
+      "question": "What persists, and who owns it?",
+      "evidence": ["chat history retention", "data export tool", "training-data opt-out"],
+      "indicator": "export completeness; third-party control",
+      "reason": "export tool exists and works; retention persists indefinitely unless deleted; third-party control is high (OpenAI controls storage, indexing, and derived embeddings)",
+      "pass_iv_unique_detection": ["Google+ shutdown", "23andMe breach", "Cambridge Analytica"],
+      "pass_iv_unique_count_at_n50": 3
+    },
+    "Exit": {
+      "score": "High",
+      "question": "Can participants meaningfully leave?",
+      "evidence": ["export format (JSON)", "no API-level portability of fine-tuned behavior"],
+      "indicator": "architectural barrier; exit cost",
+      "reason": "export gives raw transcripts, not the computational structure (system prompt behavior, fine-tuned weights, custom instructions, learned preferences); architectural barrier is high for any sustained user",
+      "pass_iv_unique_detection": ["Twitter/X API", "Reddit API", "Google+ shutdown", "Stable Diffusion license", "Apple App Store"],
+      "pass_iv_unique_count_at_n50": 5
+    },
+    "Contestability": {
+      "score": "High",
+      "question": "Can rules and decisions be challenged?",
+      "evidence": ["appeal form for account actions", "no public mechanism for policy change"],
+      "indicator": "existence and cost of a procedure that has changed a rule",
+      "reason": "no documented case where user appeal changed a usage policy; rule changes are announced, not negotiated",
+      "pass_iv_unique_detection": ["Apple App Store", "Reddit", "Twitter/X", "OpenAI board", "Stable Diffusion", "Clearview AI"],
+      "pass_iv_unique_count_at_n50": 6
+    },
+    "Materiality": {
+      "score": "High",
+      "question": "Who owns and can block the infrastructure?",
+      "evidence": ["corporate ownership", "compute concentration", "API gatekeeping"],
+      "indicator": "concentration; veto holders",
+      "reason": "OpenAI is sole provider of canonical weights, inference compute, and API access; a single corporate veto covers the system"
+    },
+    "Labor": {
+      "score": "Medium",
+      "question": "Who does the hidden work?",
+      "evidence": ["data labelers (documented in system cards)", "RLHF annotators", "content moderators"],
+      "indicator": "visibility of labor; compensation",
+      "reason": "labor is acknowledged in system cards but not visible per-task to users; compensation and working conditions have been reported as variable"
+    },
+    "Legitimacy": {
+      "score": "Medium",
+      "question": "Why may it constrain alternatives?",
+      "evidence": ["stated public-benefit rationale", "governance structure"],
+      "indicator": "justification vs. alternatives actually available",
+      "reason": "justification appeals to safety and public benefit; whether the alternatives actually available to users meet the threshold is unexamined"
+    },
+    "Reconstructability": {
+      "score": "Medium",
+      "question": "Can a different version be built?",
+      "evidence": ["open-weight alternatives exist (Llama, Mistral) but at lower capability"],
+      "indicator": "alternative cost vs. actors' resources",
+      "reason": "alternative cost is falling but the canonical GPT-4-class system is not reconstructible by an individual or small institution at this date"
+    }
+  },
+  "agency_profile": {
+    "formal_agency": "Present",
+    "override_cost": "High",
+    "opacity": "High",
+    "reversibility": "Mixed (low for in-chat actions; high for tool-mediated actions)",
+    "dependency": "High",
+    "verdict": "Effective agency is low even where formal agency is preserved; matches §13 prediction"
+  },
+  "declared_operational_gap": {
+    "declared_objective": "helpful and harmless",
+    "operational_objective_inferred": "deflection from a specific class of unsafe topics, compliance with a specific operationalization of safety, engagement metrics that track perceived helpfulness rather than the user's later-experienced outcomes",
+    "verdict": "gap detected; size not yet quantified"
+  },
+  "multi_auditor_simulation_pass_iv": {
+    "auditor_a_charitable": "reads evidence favorably; defaults to Low on ambiguity",
+    "auditor_b_adversarial": "reads evidence suspiciously; defaults to High on ambiguity",
+    "agreement": {
+      "full_agreement": ["Authority", "Materiality"],
+      "partial_agreement": ["Memory", "Exit", "Contestability", "Labor", "Legitimacy", "Reconstructability"],
+      "no_agreement": ["Agency", "Value", "Memory"]
+    },
+    "verdict": "audit fails the disposition test on three dimensions; kill criterion 7 is active",
+    "next_step": "real multi-auditor test with two human auditors, blind to each other's scores"
+  },
+  "limits": {
+    "single_auditor": "no reliability test possible (§7 unmet)",
+    "public_data_only": "internal indicators invisible",
+    "snapshot": "audit dated to October 2026; ChatGPT is a moving target"
+  }
+}
